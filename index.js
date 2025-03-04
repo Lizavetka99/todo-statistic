@@ -2,7 +2,22 @@ const {getAllFilePathsWithExtension, readFile} = require('./fileSystem');
 const {readLine} = require('./console');
 
 const files = getFiles();
-const listTODO = [];
+
+function getListTODO(files) {
+    for (const file of files) {
+        const strings = file.split('\r\n');
+        for (const str of strings) {
+            if (str.includes("// TODO ")) {
+                const indexStartComment = str.indexOf("// TODO ") + 8;
+                const indexEndComment = str.indexOf(";", indexStartComment);
+                const comment = str.substring(indexStartComment, indexEndComment);
+
+            }
+        }
+    }
+}
+
+const listTODO = getListTODO(files);
 console.log('Please, write your command!');
 readLine(processCommand);
 
@@ -23,10 +38,6 @@ function processCommand(command) {
             break;
 
         default:
-            if (command.startsWith("// TODO ")) {
-                const comment = command.substring(8);
-                listTODO.push(comment);
-            }
             console.log('wrong command');
             break;
     }
