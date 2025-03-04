@@ -17,6 +17,10 @@ function processCommand(command) {
             process.exit(0);
             break;
         default:
+            if (command.startsWith("// TODO ")) {
+                const comment = command.substring(8);
+                console.log(comment);
+            }
             console.log('wrong command');
             break;
     }
