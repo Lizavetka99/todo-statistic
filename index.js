@@ -2,7 +2,7 @@ const {getAllFilePathsWithExtension, readFile} = require('./fileSystem');
 const {readLine} = require('./console');
 
 const files = getFiles();
-
+const listTODO = [];
 console.log('Please, write your command!');
 readLine(processCommand);
 
@@ -12,14 +12,20 @@ function getFiles() {
 }
 
 function processCommand(command) {
+    console.log(files);
     switch (command) {
         case 'exit':
             process.exit(0);
             break;
+        case 'show':
+            console.log(listTODO);
+            console.log(listTODO.length);
+            break;
+
         default:
             if (command.startsWith("// TODO ")) {
                 const comment = command.substring(8);
-                console.log(comment);
+                listTODO.push(comment);
             }
             console.log('wrong command');
             break;
